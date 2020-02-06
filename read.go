@@ -8,13 +8,11 @@ import (
 )
 
 func parse(r io.Reader) error {
-	fmt.Printf("%+v", r)
 	buffer := new(bytes.Buffer)
 	_, err := buffer.ReadFrom(r)
 	if err != nil {
 		return err
 	}
-	fmt.Println(string(buffer.Next(8)))
 	if string(buffer.Next(8)) != "\x89PNG\r\n\x1a\n" {
 		return fmt.Errorf("not a PNG")
 	}
@@ -23,13 +21,12 @@ func parse(r io.Reader) error {
 }
 
 func main() {
-	imageFile := "sub.png"
+	imageFile := "sample.png"
 	file, err := os.Open(imageFile)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
-	fmt.Printf("%+v", file)
 	defer file.Close()
 
 	err = parse(file)
