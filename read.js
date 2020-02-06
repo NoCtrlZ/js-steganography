@@ -29,9 +29,19 @@ const parse = (file_name) => {
             data = raw_data.slice(n + (i * 4), n + (i * 4) + 4)
             text = data.toString()
             i ++
+            console.log(i)
         }
+        // text = ""
+        // while (text != "IEND") {
+        //     data = raw_data.slice(n + (i * 4), n + (i * 4) + 4)
+        //     text = data.toString()
+        //     console.log(text)
+        //     console.log(i)
+        //     i ++
+        // }
         console.log(n + (i * 4) + 4)
         console.log(raw_data.slice(0, n + (i * 4) + 4))
+        console.log(Buffer.from('Hello world'))
         fs.writeFile('after.png', raw_data, 'binary', (err) => {
             console.log(err)
         })
@@ -40,7 +50,7 @@ const parse = (file_name) => {
 
 const to_int = (bytes) => {
     let [n, number] = [bytes.length - 1, 0]
-    for (i = 0; i < bytes.length; i ++) {
+    for (i = 0; i < bytes.length; i++) {
         number += bytes[i] * (256 ** (n))
         n--
     }
